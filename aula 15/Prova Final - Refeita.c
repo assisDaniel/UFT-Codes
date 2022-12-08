@@ -101,15 +101,14 @@ void main(){
 
         case 3:
             for (int k = 0; k <= 1; k++){
-                for (int i = 0; i <= 9; i++){
-                    if (venda[i][1][k] != 0){
-                        if (venda[i][0][k] == 1 || venda[i][0][k] == 2){
-                            peso += 20 * venda[i][1][k];
-                        }
-                        else{
-                            peso2 += 5 * venda[i][1][k];
-                        }
+                int i=0;
+                while(venda[i][1][k] != 0){
+                    if (venda[i][0][k] == 1 || venda[i][0][k] == 2){
+                        peso += 20 * venda[i][1][k];
+                    }else{
+                        peso2 += 5 * venda[i][1][k];
                     }
+                    i++;
                 }
             }
             pesoT = peso + peso2;
@@ -118,21 +117,21 @@ void main(){
             for (int k = 0; k <= 1; k++){
                 printf("\n--------------------------------------------------------------");
                 printf("\nCliente %d", 1+k);
-                for (int i = 0; i <= 9; i++){
-                    if (venda[i][1][k] != 0){
-                        if (venda[i][0][k] == 1 || venda[i][0][k] == 2){
-                            peso = 20 * venda[i][1][k];
-                            if (peso < 1000){
-                                printf("\nO pedido numero %d teve menos de 1000kg.", 1+i);
-                            }
-                        }
-                        else{
-                            peso = 5 * venda[i][1][k];
-                            if (peso < 1000){
-                                printf("\nO pedido numero %d teve menos de 1000kg.", 1+i);
-                            }
+                int i=0;
+                while(venda[i][1][k] != 0){
+                    if (venda[i][0][k] == 1 || venda[i][0][k] == 2){
+                        peso = 20 * venda[i][1][k];
+                        if (peso < 1000){
+                            printf("\nO pedido numero %d teve menos de 1000kg.", 1+i);
                         }
                     }
+                    else{
+                        peso = 5 * venda[i][1][k];
+                        if (peso < 1000){
+                            printf("\nO pedido numero %d teve menos de 1000kg.", 1+i);
+                        }
+                    }
+                    i++;
                 }
             }
             break;
@@ -168,18 +167,17 @@ int cFrete(int venda[10][3][2], int cliente, int pedidoRel){
 }
 
 float media(int venda[10][3][2], int cliente){
-    int pesoT = 0, peso = 0, peso2 = 0, cont = 0;
+    int i=0, pesoT = 0, peso = 0, peso2 = 0, cont = 0;
     float media = 0;
 
-    for (int i = 0; i <= 9; i++){
-        if (venda[i][1][cliente] != 0){
-            cont++;
-            if (venda[i][0][cliente] == 1 || venda[i][0][cliente] == 2){
-                peso += 20 * venda[i][1][cliente];
-            }else{
-                peso2 += 5 * venda[i][1][cliente];
-            }
+    while(venda[i][1][cliente] != 0){
+        cont++;
+        if (venda[i][0][cliente] == 1 || venda[i][0][cliente] == 2){
+            peso += 20 * venda[i][1][cliente];
+        }else{
+            peso2 += 5 * venda[i][1][cliente];
         }
+        i++;
     }
     pesoT = peso + peso2;
     media = (float)pesoT / cont;
